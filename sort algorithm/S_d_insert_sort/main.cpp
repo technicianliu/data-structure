@@ -1,4 +1,4 @@
-//×Ô¼º°´ÕÕÖ±½Ó²åÈëÅÅĞòËùĞ´µÄ´úÂë
+//è‡ªå·±æŒ‰ç…§ç›´æ¥æ’å…¥æ’åºæ‰€å†™çš„ä»£ç 
 #include <iostream>
 using namespace std;
 
@@ -24,7 +24,7 @@ void d_insert_sort(int a[],int n)
             if(a[j]>temp)
             {
                 a[j+1]=a[j];
-                if(j==0)  //Õâ¸öÅĞ¶Ï±Ø²»¿ÉÉÙ
+                if(j==0)  //è¿™ä¸ªåˆ¤æ–­å¿…ä¸å¯å°‘
                     a[j]=temp;
             }
             else
@@ -37,13 +37,14 @@ void d_insert_sort(int a[],int n)
 }
 
 
-//°ÑÊéÉÏµÄÀàÊµÏÖÖ®ºóÄÃ¹ıÈ¥¡£
+//æŠŠä¹¦ä¸Šçš„ç±»å®ç°ä¹‹åæ‹¿è¿‡å»ã€‚
 template<class T,class othertype> void d_insert_sort(datalist<T,othertype> &List)
-{  //·Çµİ¼õÅÅĞò¡£
+{  //éé€’å‡æ’åºã€‚
     int i,j;
     for(i=2;i<=List.length();i++)
     {
         List[0]=List[i];
+       //list[0]æ—¢èµ·åˆ°ä¸´æ—¶å­˜æ”¾å…ƒç´ ä½œç”¨ï¼Œåˆèµ·åˆ°ç›‘è§†å“¨çš„ä½œç”¨ï¼Œå¯ä»¥é¿å…æ¯æ¬¡æ¯”è¾ƒéƒ½è¦åˆ¤æ–­æ˜¯å¦è¶…è¶Šäº†è¡¨å¤´
         j=i-1;
         while(List[0]<List[j])
         {
