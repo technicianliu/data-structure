@@ -88,7 +88,7 @@ template<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treeno
              return parent(subtree->rightchild,pcurrent);
 }
 //这个是自己写出的寻找双亲的代码
-tempalte<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treenode<T> *current)
+/*tempalte<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treenode<T> *current)
 {
      treenode<T> *temp=NULL;
      if(subtree)
@@ -101,7 +101,7 @@ tempalte<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treeno
           temp=parent(subtree->rightchild,current)
      }
      return temp;
-}
+}*/
 
 //二叉树遍历是指遵循某种次序，依次对二叉树中每个节点均做一次且仅做一次访问。从二叉树的定义可知，一颗非空的二叉树由根结点及左右子树这三个部分构成。因此，在任意给定的结点上，可以按某种次序执行三个操作：(1),访问结点本身(V).(2),遍历该结点的左子树(L).(3)，遍历该结点的右子树(R).二叉树是一种有序树，因此，仅有VLR(前序遍历)，LVR(中序遍历)，LRV(后序遍历)，另外三种遍历是前三种的镜像。
 template<class T> void binarytree<T>::preorder(treenode<T> *tmp) const //前序遍历递归算法
