@@ -26,7 +26,7 @@ template<class T> class binarytree
 
     private:
         treenode<T> *root; //二叉树根结点
-        treenode<T> *current; //书上没有这里，但觉得和树一样加上这个结点有利于查找，插入等一系列操作，
+        treenode<T> *current; //书上没有这里，但觉得和树一样加上这个结点有利于查找，插入等一系列操作，还可以写出查找双亲函数。查找指定值得函数。
         T refvalue; //数据输入停止标志
         void creatbinarytree(istream &in,treenode<T> *&tmp); //前序遍历次序建树
         void traverse(treenode<T> *tmp,ostream &out) const; //前序遍历输出二叉树
@@ -36,7 +36,7 @@ template<class T> class binarytree
         int Size(treenode<T> *tmp) const; //计算根为tmp的二叉树结点个数递归算法
         int Height(treenode<T> *tmp) const; //计算根为tmp的二叉树深度递归算法
         void printbinarytree(treenode<T> *tmp,ostream &out); //以广义表形式输出二叉树递归算法
-
+        bool Find(treenode<T>* t,T value);
     public:
         binarytree() {root=NULL;}
         binarytree(T flag):refvalue(flag),root(NULL){}  //构造空二叉树，设置标志
@@ -46,7 +46,7 @@ template<class T> class binarytree
         int Height() const {return Height(root);}
         int Size() const {return Size(root);} //返回二叉树中结点个数
         bool isempty() {return root==NULL;}
-        treenode<T>* parent(treenode<T> *subtree,treenode<T> *pcurrent); //返回从subtree出发，pcurrent结点的双亲地址
+        treenode<T>* parent(treenode<T> *subtree,treenode<T> *pcurrent); //返回从subtree出发，pcurrent结点的双亲地址.总有这种实现一个功能需要写两个函数的情况，写这个函数是为了递归调用。
         treenode<T>* getroot() const {return root;} //获取根结点的位置
         //void printbinarytree() const {printbinarytree(root);}  //以广义表形式输出二叉树
         void preorder() const {preorder(root);} //前序遍历二叉树。
@@ -54,6 +54,10 @@ template<class T> class binarytree
         void postorder() const {postorder(root);} //后序遍历二叉树。
         void levelorder() const;             //层次遍历二叉树。
         void inorderstack();
+     
+        void print_current();
+        bool Parent();  //这个函数没有办法实现递归，但是它具有很好的封装性。
+        bool Find_value(T value);
 };
 
 template<class T> binarytree<T>::binarytree(binarytree<T> &tree)
@@ -94,17 +98,17 @@ template<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treeno
              return parent(subtree->rightchild,pcurrent);
 }
 //这个是自己写出的寻找双亲的代码
-/*tempalte<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treenode<T> *current)
+/*tempalte<class T> treenode<T>* binarytree<T>::parent(treenode<T> *subtree,treenode<T> *pcurrent)
 {
      treenode<T> *temp=NULL;
      if(subtree)
      {
-          if(subtree->leftchild==current||subtree->rightchild==tree)
+          if(subtree->leftchild==pcurrent||subtree->rightchild==pcurrent)
                return temp=subtree;
-          temp=parent(->subtree->leftchild,current);
+          temp=parent(subtree->leftchild,pcurrent);
           if(temp!=NULL)
                return temp;
-          temp=parent(subtree->rightchild,current)
+          temp=parent(subtree->rightchild,pcurrent);
      }
      return temp;
 }*/
@@ -321,3 +325,47 @@ template<class T> void binarytree<T>::levelorder() const
 
     cout<<endl;
 }
+
+template<class T> void binarytree<T>::print_current()
+{
+     cout<<current->data<<endl;
+}
+
+template<class T> void binarytree<T>::Parent()
+{
+    treenode<T> *temp=current;
+    if(current==root||current==NULL)
+         return;
+    else
+        current=parent(root,temp); 
+}
+
+template<class T> bool binarytree<T>::Find(treenode<T> *t,T value)
+{                //这个与查找双亲的返回结点值得函数有所不同了，利用bool值来确定递归的运行或者是终止。
+     if(t)
+     {
+          if(t->data==value)
+          {
+               current=t;
+               return true;
+          }
+          else
+          {
+               if(Find(t->leftchild,value))
+                    return true;
+               else
+                   return Find(t>rightchild,value);
+          }
+     }
+     return false;
+}
+
+
+template<class T> bool binarytree<T>::Find_value(T value)
+{
+     bool temp;
+     temp=Find(root,value);
+          return temp; 
+}
+
+
