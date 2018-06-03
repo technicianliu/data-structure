@@ -11,11 +11,11 @@ template<class T> class treenode
         treenode<T> *leftchild,*rightchild;
     public:
         treenode();
-        treenode(T temp,treenode<T> *left=NULL,treenode<T> *right=NULL); //Ê¹ÓÃÄ¬ÈÏ²ÎÊı
-        treenode<T>* Copy();  //¸´ÖÆ½áµã
-        void Release();       //ÊÍ·Å½áµã
-        void setleft(treenode<T> *left); //ÉèÖÃ×óÁ´
-        void setright(treenode<T> *right); //ÉèÖÃÓÒÁ´
+        treenode(T temp,treenode<T> *left=NULL,treenode<T> *right=NULL); //ä½¿ç”¨é»˜è®¤å‚æ•°
+        treenode<T>* Copy();  //å¤åˆ¶ç»“ç‚¹
+        void Release();       //é‡Šæ”¾ç»“ç‚¹
+        void setleft(treenode<T> *left); //è®¾ç½®å·¦é“¾
+        void setright(treenode<T> *right); //è®¾ç½®å³é“¾
 };
 
 template<class T> treenode<T>::treenode():leftchild(NULL),rightchild(NULL) {}
@@ -27,7 +27,7 @@ template<class T> treenode<T>::treenode(T temp,treenode<T> *left,treenode<T> *ri
     rightchild=right;
 }
 
-/*template<class T> treenode<T>* treenode<T>::Copy()
+/**template<class T> treenode<T>* treenode<T>::Copy()  //è¿™ä¸ªæ˜¯è‡ªå·±æœ€å¼€å§‹å†™çš„ç®—æ³•
 {
 
      if(rightchild==NULL&&leftright==NULL)
@@ -36,7 +36,7 @@ template<class T> treenode<T>::treenode(T temp,treenode<T> *left,treenode<T> *ri
          temp->data=data;
          temp->rightchild=NULL;
          temp->leftchild=NULL;
-         return tenp;
+         return temp;
      }
      else
      {
@@ -54,7 +54,8 @@ template<class T> treenode<T>::treenode(T temp,treenode<T> *left,treenode<T> *ri
             return temp;
 
      }
-}*/
+}**/
+
 
 template<class T> treenode<T>* treenode<T>::Copy()
 {
@@ -70,7 +71,7 @@ template<class T> treenode<T>* treenode<T>::Copy()
 
     treenode<T> *temp=new treenode<T>(data,newleft,newright);
     if(temp)
-        return temp;
+        return temp;   //è¿™ä¸ªæ˜¯è¯¾æœ¬ä¸Šçš„ï¼Œè§‰å¾—è¿™é‡Œçš„åˆ¤æ–­æœ‰ç‚¹å¤šä½™
     else
         return NULL;
 }
@@ -99,7 +100,7 @@ template<class T> treenode<T>* treenode<T>::Copy()
     return;
 }*/
 
-template<class T> void treenode<T>::Release()  //½«µ±Ç°½áµãµÄËùÓĞ×ÓÊ÷É¾³ı,ÎŞ·¨É¾³ıµ±Ç°½áµã£¬×Ô¼ºµÄËã·¨¿ÉÒÔÉ¾³ı
+template<class T> void treenode<T>::Release()  //å°†å½“å‰ç»“ç‚¹çš„æ‰€æœ‰å­æ ‘åˆ é™¤,æ— æ³•åˆ é™¤å½“å‰ç»“ç‚¹ï¼Œè‡ªå·±çš„ç®—æ³•å¯ä»¥åˆ é™¤
 {
     if(leftchild)
     {
@@ -116,7 +117,7 @@ template<class T> void treenode<T>::Release()  //½«µ±Ç°½áµãµÄËùÓĞ×ÓÊ÷É¾³ı,ÎŞ·¨É¾
 }
 
 
-/*ÔÚÖØĞÂÉèÖÃ×óÓÒÁ´£¬Ó¦ÏÈÊÍ·ÅÔ­ÓĞµÄ×óÓÒÁ´Õ¼ÓÃµÄ¿Õ¼ä¡£ÕâÀïÏ£ÍûÖ¸ÕëµÄÁ½¸ö×ÓÊ÷ÊÇÒÑ¾­¸´ÖÆºÃÁËµÄ*/
+/*åœ¨é‡æ–°è®¾ç½®å·¦å³é“¾ï¼Œåº”å…ˆé‡Šæ”¾åŸæœ‰çš„å·¦å³é“¾å ç”¨çš„ç©ºé—´ã€‚è¿™é‡Œå¸Œæœ›æŒ‡é’ˆçš„ä¸¤ä¸ªå­æ ‘æ˜¯å·²ç»å¤åˆ¶å¥½äº†çš„*/
 template<class T> void treenode<T>::setleft(treenode<T> *left)
 {
     if(leftchild)
